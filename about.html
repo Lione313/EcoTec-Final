@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Tec - Quiénes Somos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <style></style>
+    <header>
+        <div class="logo">
+            <img class="icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/4e/89/ac/4e89ac12-0f06-d516-feaf-62b544fcb66b/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png" alt="Logo">
+            <h1>EcoTec</h1>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            ☰
+        </div>
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="inicio.html">INICIO</a></li>
+                <li><a href="about.html">QUIÉNES SOMOS</a></li>
+                <li><a href="blog.html">BLOG</a></li>
+                <li><a href="contacto.html">CONTACTO</a></li>
+                <li><a href="minijuego.html" class="contact-btn">Recicla y Gana</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="sobre-eco">
+        <div class="hero">
+            <div class="overlay"></div>
+            <h2>Sobre EcoTec</h2>
+            <p>EcoTec es una organización dedicada a promover el reciclaje y la sostenibilidad. Nuestro objetivo es educar y motivar a las personas para que se conviertan en agentes de cambio en su comunidad.</p>
+            <p>Creemos que cada pequeño esfuerzo cuenta y que juntos podemos hacer una gran diferencia en la lucha contra la contaminación y el cambio climático.</p>
+            <h3>Nuestros Valores</h3>
+            <ul>
+                <li>Sostenibilidad</li>
+                <li>Educación</li>
+                <li>Compromiso comunitario</li>
+                <li>Innovación</li>
+            </ul>
+        </div>
+    </section>
+    
+
+    <footer class="footer">
+        <p>&copy; 2024 EcoTec. Todos los derechos reservados.</p>
+    </footer>
+    
+    <script>
+        function toggleMenu() {
+            document.querySelector("header").classList.toggle("nav-active");
+        }
+    </script>
+</body>
+</html>

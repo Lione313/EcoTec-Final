@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Tec</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    
+    <header>
+        <div class="logo">
+            <img class="icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/4e/89/ac/4e89ac12-0f06-d516-feaf-62b544fcb66b/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png" alt="Logo">
+            <h1>EcoTec</h1>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            ☰
+        </div>
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="inicio.html">INICIO</a></li>
+                <li><a href="about.html">QUIÉNES SOMOS</a></li>
+                <li><a href="blog.html">BLOG</a></li>
+                <li><a href="contacto.html">CONTACTO</a></li>
+                <li><a href="minijuego.html" class="contact-btn">Recicla y  Gana</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <div class="overlay"></div>
+        <div class="card-container">
+            <div class="card">
+                <h3>Aprende a reciclar con EcoTec</h3>
+                <p>Ofrecemos blogs para que pases un buen rato ayudando al planeta.</p>
+            </div>
+            <div class="card">
+                <h3>Encuentra tu lugar en el mundo</h3>
+                <p>Haz de este mundo un lugar mejor para vivir de un residuo a la vez.</p>
+            </div>
+            <div class="card">
+                <h3>Prueba nuestro Videojuego Recicla  y Gana</h3>
+                <p>Con nuestro divertidisimo juego podras jugar y ayudar al planeta tierra.</p>
+            </div>
+            <div class="residuos-background">
+                <div class="residuos-container">
+                    <img class="basurero" src="https://plazavea.vteximg.com.br/arquivos/ids/19926610-450-450/image-6805009fd5954c7e80259c1ac40b154b.jpg?v=638016679981800000" alt="Basurero">
+                    <div class="contador">
+                        <h2>Residuos botados hoy:</h2>
+                        <p id="cantidad-residuos">0 </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+   
+
+    <footer class="footer">
+        <p>&copy; 2024 EcoTec. Todos los derechos reservados.</p>
+    </footer>
+    
+    
+    <script>
+     
+
+        function toggleMenu() {
+            document.querySelector("header").classList.toggle("nav-active");
+        }
+    </script>
+</body>
+</html>
