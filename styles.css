@@ -19,8 +19,10 @@ header {
     background: rgba(0, 0, 0, 0.5);
     position: fixed;
     width: 100%;
-    z-index: 10;
+    z-index: 1000; /* Asegura que el header esté siempre por encima */
+    top: 0; /* Fija el header en la parte superior */
 }
+
 
 header .logo h1 {
     font-size: 1.5em;
@@ -79,22 +81,12 @@ header.nav-active nav ul {
     position: relative;
 }
 
-.hero .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-   
-  
-}
 
 .card-container {
-    margin-top:20px;
+    margin-top: -100px; /* Aumenta este valor para bajarlo más */
     display: flex;
     gap: 20px;
     z-index: 1;
-    
 }
 
 .card {
@@ -107,8 +99,11 @@ header.nav-active nav ul {
     color: white;
     transition: transform 0.3s ease, background-color 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-top: 20px;
+    margin-top: 30px;
+    height:500px;
+    width: 400px; /* Aumenta este valor para bajarlas más */
 }
+
 
 .card h3 {
     margin-bottom: 10px;
@@ -188,8 +183,9 @@ header.nav-active nav ul {
     }
 
     .card {
-        width: 80%;
-    }
+        width: 80%; /* Reducir el ancho para tablets */
+        height: auto; /* Ajuste automático de la altura */
+    }s
 
     .icon {
         height: 40px;
@@ -217,9 +213,12 @@ header.nav-active nav ul {
     }
 
     .card {
-        width: 90%;
-        padding: 15px;
-    }
+    width: 90%; /* Ajuste del ancho para móviles */
+    padding: 15px;
+    height: auto;
+    margin-top: 100px; /* Ajuste automático de la altura con margen superior */
+}
+
 
     .footer {
         position: static;
@@ -256,4 +255,288 @@ header.nav-active nav ul {
     font-size: 1.2em;
 }
 
+
+.sobre-eco {
+    padding: 40px 20px;
+    margin-top:150px; 
+}
+
+.eco-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.eco-box {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    width: 100%;
+    color: white;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.eco-box:hover {
+    transform: translateY(-10px);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.eco-image {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.eco-text h2, .eco-text h3 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.eco-text p, .eco-text ul {
+    font-size: 1em;
+}
+
+/* Estilos Responsivos */
+@media (min-width: 768px) {
+    .eco-content {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    
+    .eco-box {
+        flex-basis: 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    .eco-box {
+        padding: 15px;
+    }
+
+    .eco-text h2, .eco-text h3 {
+        font-size: 1.2em;
+    }
+
+    .eco-text p, .eco-text ul {
+        font-size: 0.9em;
+    }
+}
+
+/* Estilos para la sección del blog */
+/* Estilos para la sección del blog */
+.blog-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    margin-top: 100px; /* Ajusta este valor según el espacio que quieras */
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: white;
+}
+
+
+.blog-header h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.blog-header p {
+    text-align: center;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+/* Formulario de comentarios */
+.comment-form {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.comment-form h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.comment-form label {
+    display: block;
+    font-size: 1.1em;
+    margin: 10px 0 5px;
+}
+
+.comment-form input,
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
+}
+
+.comment-form button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.comment-form button:hover {
+    background-color: #218838;
+}
+
+/* Sección de comentarios */
+.comment-section {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.comment-section h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.comment {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 1em;
+    color: white;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .blog-section {
+        padding: 20px 15px;
+    }
+
+    .comment-form input,
+    .comment-form textarea {
+        font-size: 0.9em;
+    }
+
+    .comment-form button {
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+
+    .comment-section h3 {
+        font-size: 1.3em;
+    }
+
+    .comment {
+        font-size: 0.9em;
+    }
+}
+
+.section-contacto {
+    padding: 40px;
+    background-color: white;
+    margin-top: 20px;
+}
+
+.contacto-header h2 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.contacto-header p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.contact-cards-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.contact-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    width: 30%;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.contact-card h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 10px;
+}
+
+.contact-card p {
+    color: #666;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.contact-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para el formulario de contacto */
+.contacto-formulario {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.contacto-formulario label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.contacto-formulario input, .contacto-formulario textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.contacto-formulario button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.contacto-formulario button:hover {
+    background-color: #45a049;
+}
 
