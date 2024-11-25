@@ -3,104 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoTec Blog</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Asegúrate de enlazar el archivo CSS correcto -->
+    <title>Blog - EcoTec</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
     <header>
-        <div class="logo">
-            <img class="icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/4e/89/ac/4e89ac12-0f06-d516-feaf-62b544fcb66b/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png" alt="Logo">
-            <h1>EcoTec</h1>
-        </div>
-        <div class="hamburger" onclick="toggleMenu()">
-            ☰
-        </div>
-        <nav id="nav-menu">
-            <ul>
-                <li><a href="index.html">INICIO</a></li>
-                <li><a href="about.html">QUIÉNES SOMOS</a></li>
-                <li><a href="blog.html">BLOG</a></li>
-                <li><a href="contacto.html">CONTACTO</a></li>
-                <li><a href="minijuego.html" class="contact-btn">Recicla y Gana</a></li>
+        <nav>
+            <div class="logo">
+                <img src="https://i.postimg.cc/23RBcPrv/logoecotec.jpg" alt="EcoTec Logo">
+            </div>
+            <ul id="nav-links">
+                <span id="close-menu" class="close-menu">&times;</span>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="about.html">¿Quiénes somos?</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="minijuego.html">Recicla y Gana</a></li>
+                
+                <!-- Icono de notificación -->
+                <li>
+                    <a href="javascript:void(0)" id="notification-icon">
+                        <img src="https://img.icons8.com/ios/50/000000/appointment-reminders.png" alt="Notificación" class="notification-icon">
+                    </a>
+                </li>
             </ul>
+            
+           <!-- Modal de notificaciones -->
+<div id="notification-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span id="close-modal" class="close">&times;</span>
+        <h2 style="color: black;">Notificaciones</h2>
+        <ul>
+            <li style="color: black;">Notificación 1: ¡Nuevo artículo publicado!</li>
+            <li style="color: black;">Notificación 2: ¡Reciclaje completado con éxito!</li>
+            <li style="color: black;">Notificación 3: ¡Nuevo comentario en tu publicación!</li>
+        </ul>
+    </div>
+</div>
+
+            
+            <div class="hamburger" id="hamburger-menu">
+                &#9776; <!-- Icono de hamburguesa -->
+            </div>
         </nav>
     </header>
-    
-    <main>
-        <section class="blog-section">
-            <div class="blog-header">
-                <h2>EcoTec Blog</h2>
-                <p>Comparte tus pensamientos sobre el medio ambiente y la sostenibilidad.</p>
-            </div>
-            
-            <!-- Formulario de comentarios -->
-            <div class="comment-form">
-                <h3>Deja un comentario</h3>
-                <form id="comment-form">
-                    <label for="name">Nombre:</label>
-                    <input type="text" id="name" name="name" required>
-                    
-                    <label for="comment">Comentario:</label>
-                    <textarea id="comment" name="comment" rows="4" required></textarea>
-                    
-                    <button type="submit">Enviar Comentario</button>
-                </form>
-            </div>
-            
-            <!-- Lista de comentarios -->
-            <div class="comment-section" id="comment-section">
-                <h3>Comentarios</h3>
-                
-                <div class="comment">
-                    <p><strong>Juan Pérez:</strong> Me encanta lo que están haciendo en EcoTec. Cada pequeña acción cuenta.</p>
-                </div>
-                
-                <div class="comment">
-                    <p><strong>María López:</strong> Es importante que todos pongamos de nuestra parte para proteger el medio ambiente.</p>
-                </div>
-                
-                <div class="comment">
-                    <p><strong>Carlos García:</strong> ¡Sigan así! Este tipo de proyectos son los que hacen falta.</p>
-                </div>
-                
-            </div>
-        </section>
-    </main>
-    
-    <footer class="footer">
-        <p>&copy; 2024 EcoTec. Todos los derechos reservados.</p>
+
+    <section id="blog" class="section">
+        <h3 style="margin-top: 100px;">Aprende a reciclar con EcoTec</h3>
+        <p>Ofrecemos blogs para que pases un buen rato ayudando al planeta.</p>
+
+        <!-- Contenedor de las publicaciones -->
+        <div id="blog-posts-container">
+            <!-- Las publicaciones se agregarán dinámicamente aquí -->
+        </div>
+
+        <!-- Formulario para el comentario -->
+        <div class="comment-form bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto my-8 transform transition-all duration-300 hover:scale-105">
+            <input type="text" id="user-name" placeholder="Tu nombre" required class="w-full p-3 mb-4 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300">
+            <textarea id="user-comment" rows="4" placeholder="Escribe tu comentario..." required class="w-full p-3 mb-4 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"></textarea>
+            <button id="submit-comment" class="w-full bg-green-500 text-white p-3 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300">Enviar Comentario</button>
+        </div>
+
+        <!-- Botón para cargar más publicaciones -->
+        <button id="load-more" class="btn">Ver más publicaciones</button>
+    </section>
+    <footer>
+        <p>© 2024 EcoTec. Todos los derechos reservados.</p>
+        <p>¿Tienes alguna sugerencia? <a href="contacto.html">Contáctanos</a></p>
     </footer>
-    
-    
+
+    <script src="script.js"></script>
     <script>
-        // Función para mostrar/ocultar el menú de navegación en dispositivos móviles
-        function toggleMenu() {
-            document.querySelector("header").classList.toggle("nav-active");
+        // Datos de ejemplo para las publicaciones del blog
+        const posts = [
+            { title: "Reciclaje en casa", content: "Aprende cómo puedes reciclar de manera efectiva en tu hogar. ¡Es fácil y ayuda mucho al planeta!" },
+            { title: "Beneficios del reciclaje", content: "Descubre cómo el reciclaje puede mejorar la salud de nuestro planeta y nuestra vida diaria." },
+            { title: "Cómo reducir tu huella de carbono", content: "Una pequeña guía para empezar a reducir tu huella de carbono a través de acciones sencillas." },
+            { title: "La importancia de la energía renovable", content: "Entiende por qué las energías renovables son clave para un futuro sostenible." },
+        ];
+
+        // Función para cargar las publicaciones
+        function loadPosts() {
+            const container = document.getElementById('blog-posts-container');
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.classList.add('blog-post');
+                postElement.innerHTML = `
+                    <h4>${post.title}</h4>
+                    <p>${post.content}</p>
+                `;
+                container.appendChild(postElement);
+            });
         }
 
-        // Función para agregar un comentario dinámicamente
-        document.getElementById("comment-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Evita que el formulario se recargue
-            
-            // Obtener los valores del formulario
-            const name = document.getElementById("name").value;
-            const commentText = document.getElementById("comment").value;
-            
-            // Crear un nuevo comentario en el DOM
-            const newComment = document.createElement("div");
-            newComment.classList.add("comment");
-            newComment.innerHTML = `<p><strong>${name}:</strong> ${commentText}</p>`;
-            
-            // Agregar el nuevo comentario a la sección de comentarios
-            document.getElementById("comment-section").appendChild(newComment);
-            
-            // Limpiar el formulario después de agregar el comentario
-            document.getElementById("name").value = "";
-            document.getElementById("comment").value = "";
-        });
-    </script>
+        // Mostrar más publicaciones
+        document.getElementById('load-more').addEventListener('click', loadPosts);
 
+        // Cargar las primeras publicaciones al iniciar la página
+        loadPosts();
+
+        // Manejo del formulario de comentarios
+        document.getElementById('submit-comment').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const userName = document.getElementById('user-name').value;
+            const userComment = document.getElementById('user-comment').value;
+
+            if (userName && userComment) {
+                const commentElement = document.createElement('div');
+                commentElement.classList.add('comment');
+
+                commentElement.innerHTML = `
+                    <h4>Comentario de ${userName}</h4>
+                    <p>${userComment}</p>
+                `;
+
+                // Agregar el comentario al contenedor de publicaciones
+                const container = document.getElementById('blog-posts-container');
+                container.prepend(commentElement); // Añadirlo al principio para que aparezca arriba
+
+                // Limpiar el formulario después de enviar
+                document.getElementById('user-name').value = '';
+                document.getElementById('user-comment').value = '';
+            }
+        });
+
+        // Menú móvil
+        const hamburger = document.getElementById('hamburger-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        // Obtener el botón de cierre
+const closeMenu = document.getElementById('close-menu');
+
+// Evento para cerrar el menú al hacer clic en la "X"
+closeMenu.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+});
+
+        
+    </script>
+    <script>
+        
+    </script>
 </body>
 </html>
-

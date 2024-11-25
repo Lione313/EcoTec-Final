@@ -3,72 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eco Tec</title>
+    <title>EcoTec - Reciclaje y Sostenibilidad</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    
     <header>
-        <div class="logo">
-            <img class="icon" src="https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/4e/89/ac/4e89ac12-0f06-d516-feaf-62b544fcb66b/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/1200x630wa.png" alt="Logo">
-            <h1>EcoTec</h1>
-        </div>
-        <div class="hamburger" onclick="toggleMenu()">
-            ☰
-        </div>
-        <nav id="nav-menu">
-            <ul>
-                <li><a href="index.html">INICIO</a></li>
-                <li><a href="about.html">QUIÉNES SOMOS</a></li>
-                <li><a href="blog.html">BLOG</a></li>
-                <li><a href="contacto.html">CONTACTO</a></li>
-                <li><a href="minijuego.html" class="contact-btn">Recicla y  Gana</a></li>
+        <nav>
+            <div class="logo">
+                <img src="https://i.postimg.cc/23RBcPrv/logoecotec.jpg" alt="EcoTec Logo">
+            </div>
+            <ul id="nav-links">
+                <span id="close-menu" class="close-menu">&times;</span>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="about.html">¿Quiénes somos?</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="minijuego.html">Recicla y Gana</a></li>
+                
+                <!-- Icono de notificación -->
+                <li>
+                    <a href="javascript:void(0)" id="notification-icon">
+                        <img src="https://img.icons8.com/ios/50/000000/appointment-reminders.png" alt="Notificación" class="notification-icon">
+                    </a>
+                </li>
             </ul>
+            
+            <!-- Modal de notificaciones -->
+            <div id="notification-modal" class="modal">
+                <div class="modal-content">
+                    <span id="close-modal" class="close">&times;</span>
+                    <h2 style="color: black;">Notificaciones</h2>
+                    <ul>
+                        <li style="color: black;">Notificación 1: ¡Nuevo artículo publicado!</li>
+                        <li style="color: black;">Notificación 2: ¡Reciclaje completado con éxito!</li>
+                        <li style="color: black;">Notificación 3: ¡Nuevo comentario en tu publicación!</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="hamburger" id="hamburger-menu">
+                &#9776; <!-- Icono de hamburguesa -->
+            </div>
         </nav>
     </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h2>Recicla para un futuro mejor</h2>
+            <p>Únete a nosotros para salvar el planeta, un paso a la vez.</p>
+            
+            <!-- Contenedor de la imagen y el contador -->
+            <div class="hero-info">
+                <!-- Imagen de tacho de basura -->
+                <div class="trash-container">
+                    <img src="https://plazavea.vteximg.com.br/arquivos/ids/19926610-512-512/image-6805009fd5954c7e80259c1ac40b154b.jpg" alt="Tacho de Basura" class="trash-image">
+                </div>
     
-    <section class="hero">
-    
-        <div class="card-container">
-            <div class="card">
-                <h3>Aprende a reciclar con EcoTec</h3>
-                <p>Ofrecemos blogs para que pases un buen rato ayudando al planeta.</p>
-            </div>
-            <div class="card">
-                <h3>Encuentra tu lugar en el mundo</h3>
-                <p>Haz de este mundo un lugar mejor para vivir de un residuo a la vez.</p>
-            </div>
-            <div class="card">
-                <h3>Prueba nuestro Videojuego Recicla  y Gana</h3>
-                <p>Con nuestro divertidisimo juego podras jugar y ayudar al planeta tierra.</p>
-            </div>
-            <div class="residuos-background">
-                <div class="residuos-container">
-                    <img class="basurero" src="https://plazavea.vteximg.com.br/arquivos/ids/19926610-450-450/image-6805009fd5954c7e80259c1ac40b154b.jpg?v=638016679981800000" alt="Basurero">
-                    <div class="contador">
-                        <h2>Residuos botados hoy:</h2>
-                        <p id="cantidad-residuos">0 </p>
-                    </div>
+                <!-- Contador animado -->
+                <div class="counter-container">
+                    <h3>Reciclados hoy:</h3>
+                    <div id="counter" class="counter">0</div>
                 </div>
             </div>
         </div>
     </section>
+    
 
-
-   
-
-    <footer class="footer">
-        <p>&copy; 2024 EcoTec. Todos los derechos reservados.</p>
+    <footer>
+        <p>© 2024 EcoTec. Todos los derechos reservados.</p>
+        <p>¿Tienes alguna sugerencia? <a href="contacto.html">Contáctanos</a></p>
     </footer>
-    
-    
-    <script>
-     
 
-        function toggleMenu() {
-            document.querySelector("header").classList.toggle("nav-active");
-        }
+    <script src="script.js"></script>
+    <script>
+        // Obtener el botón de hamburguesa y el menú
+const hamburgerMenu = document.getElementById('hamburger-menu');
+const navLinks = document.getElementById('nav-links');
+
+// Agregar un evento de clic al botón de hamburguesa
+hamburgerMenu.addEventListener('click', () => {
+    // Toggle: alterna la visibilidad del menú
+    navLinks.classList.toggle('active');
+});
+
+
+// Obtener los elementos del modal y el ícono de notificación
+const notificationIcon = document.getElementById('notification-icon');
+const modal = document.getElementById('notification-modal');
+const closeModal = document.getElementById('close-modal');
+
+// Mostrar el modal cuando se hace clic en el ícono de notificación
+notificationIcon.onclick = function() {
+    modal.style.display = "block";
+}
+
+// Cerrar el modal cuando se hace clic en el "x"
+closeModal.onclick = function() {
+    modal.style.display = "none";
+}
+
+// Cerrar el modal si el usuario hace clic fuera del modal
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Obtener el botón de cierre
+const closeMenu = document.getElementById('close-menu');
+
+// Evento para cerrar el menú al hacer clic en la "X"
+closeMenu.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+});
+
     </script>
 </body>
 </html>
