@@ -24,8 +24,28 @@
                 <li>
                     <a href="javascript:void(0)" id="notification-icon">
                         <img src="https://img.icons8.com/ios/50/000000/appointment-reminders.png" alt="Notificación" class="notification-icon">
+
+                        <style>
+                        .notification-icon {
+                            filter: brightness(0) invert(1); /* Cambia el color a blanco */
+                        }
+                        </style>
+                        
                     </a>
                 </li>
+
+                <div id="notification-modal" class="modal">
+                    <div class="modal-content">
+                        <span id="close-modal" class="close">&times;</span>
+                        <h2 style="color: black;">Notificaciones</h2>
+                        <ul>
+                            <li style="color: black;">Notificación 1: ¡Nuevo artículo publicado!</li>
+                            <li style="color: black;">Notificación 2: ¡Reciclaje completado con éxito!</li>
+                            <li style="color: black;">Notificación 3: ¡Nuevo comentario en tu publicación!</li>
+                        </ul>
+                    </div>
+                </div>
+                
             </ul>
             
            <!-- Modal de notificaciones -->

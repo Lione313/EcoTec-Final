@@ -79,6 +79,52 @@
     #puntaje {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
+
+
+    /* Estilos del modal */
+
+    #victory-message {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    z-index: 1000; /* Prioridad encima de otros elementos */
+}
+
+#victory-message .modal-content {
+    background-color: rgb(3, 3, 3);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+    max-width: 90%; /* Opcional, evita desbordes */
+    width: 400px; /* Ancho fijo para el modal */
+}
+
+
+#victory-message button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #c2c9d1;
+    color: rgb(2, 2, 2);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#victory-message button:hover {
+    background-color: #0f0f0f;
+    color: white;
+}
+
+
+
     </style>
     
 
@@ -97,8 +143,27 @@
                 <li>
                     <a href="javascript:void(0)" id="notification-icon">
                         <img src="https://img.icons8.com/ios/50/000000/appointment-reminders.png" alt="Notificación" class="notification-icon">
+
+                        <style>
+                        .notification-icon {
+                            filter: brightness(0) invert(1); /* Cambia el color a blanco */
+                        }
+                        </style>
+                        
                     </a>
                 </li>
+                <div id="notification-modal" class="modal">
+                    <div class="modal-content">
+                        <span id="close-modal" class="close">&times;</span>
+                        <h2 style="color: black;">Notificaciones</h2>
+                        <ul>
+                            <li style="color: black;">Notificación 1: ¡Nuevo artículo publicado!</li>
+                            <li style="color: black;">Notificación 2: ¡Reciclaje completado con éxito!</li>
+                            <li style="color: black;">Notificación 3: ¡Nuevo comentario en tu publicación!</li>
+                        </ul>
+                    </div>
+                </div>
+                
             </ul>
             <div id="notification-modal" class="modal">
                 <div class="modal-content">
@@ -158,6 +223,24 @@
                 <img src="https://png.pngtree.com/png-clipart/20210310/original/pngtree-glass-cup-png-image_5923802.jpg" alt="Vaso de Vidrio" draggable="true" class="item" data-type="vidrio">
                 <img src="https://w7.pngwing.com/pngs/742/431/png-transparent-glass-bottle-jar-glass-glass-lid-sticker.png" alt="Tarro de Vidrio" draggable="true" class="item" data-type="vidrio">
             </div>
+
+          <!-- Modal Container -->
+        
+            <!-- Modal Content -->
+            <div id="victory-message" style="display: none;">
+                <div class="modal-content">
+                    <h2>¡Ganaste!</h2>
+                    <p>Tu puntaje es 100</p>
+                    <button id="restart-game" class="button-restart">Reiniciar Juego</button>
+                    <button id="exit-game" class="button-exit">Salir</button>
+                </div>
+            </div>
+            
+            
+            
+            
+        
+
             
             
         </section>
@@ -169,51 +252,140 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-  // ** Funciones de Drag and Drop (Juego) **
-
-// Variables globales para las interacciones del juego
-const bins = document.querySelectorAll(".bin");
+   <script>
+    const bins = document.querySelectorAll(".bin");
 const itemsContainer = document.querySelector(".items-container");
 const items = document.querySelectorAll(".item");
 const scoreElement = document.getElementById("score");
 let score = 0;
 
-// Función para empezar el arrastre de los elementos
+// Referencias al modal de victoria
+const victoryModal = document.getElementById('victory-message');
+const restartButton = document.getElementById('restart-game');
+const exitButton = document.getElementById('exit-game');
+
+// Funciones del modal
+function showVictoryMessage() {
+    victoryModal.style.display = 'flex';
+}
+
+function hideVictoryMessage() {
+    victoryModal.style.display = 'none';
+}
+
+// Drag and Drop
 function dragStart(event) {
     event.dataTransfer.setData("type", event.target.dataset.type);
 }
 
-// Función para permitir el "drop" sobre los bins
 function dragOver(event) {
-    event.preventDefault(); // Permite el drop
+    event.preventDefault();
 }
 
-// Función para gestionar lo que ocurre cuando se suelta el item en un bin
 function dropItem(event) {
     const itemType = event.dataTransfer.getData("type");
     const binType = event.target.closest(".bin").dataset.type;
 
-    // Verifica si el tipo del item coincide con el del bin
     if (itemType === binType) {
-        score += 10;
-        scoreElement.textContent = score;
-        alert("¡Correcto!");
-
-        // Obtener el item que se soltó en el contenedor correcto y eliminarlo
+        updateScore();
         const droppedItem = document.querySelector(`.items-container .item[data-type="${itemType}"]:not([data-dropped="true"])`);
         if (droppedItem) {
-            droppedItem.setAttribute('data-dropped', 'true'); // Marca el item como "soltado"
-            droppedItem.remove(); // Elimina el item de la vista (de la parte inferior)
+            droppedItem.setAttribute('data-dropped', 'true');
+            droppedItem.remove();
         }
     } else {
         alert("¡Intenta de nuevo!");
     }
 }
 
-// Asignar los eventos a los items y bins
+// Actualización del puntaje
+function updateScore() {
+    score += 10;
+    scoreElement.textContent = score;
+
+    // Animación del puntaje
+    scoreElement.classList.add('animate');
+    setTimeout(() => {
+        scoreElement.classList.remove('animate');
+    }, 500);
+
+    // Mostrar modal si se gana
+    if (score === 100) {
+        showVictoryMessage();
+    }
+}
+
+// Reiniciar el juego
+restartButton.addEventListener("click", () => {
+    score = 0;
+    scoreElement.textContent = score;
+    hideVictoryMessage();
+
+    items.forEach(item => {
+        item.setAttribute('data-dropped', 'false');
+        item.style.transform = '';
+        itemsContainer.appendChild(item);
+    });
+});
+
+// Salir del juego
+exitButton.addEventListener("click", () => {
+    alert("Gracias por jugar!");
+    window.location.href = "index.html";
+});
+
+// Touch (para dispositivos móviles)
+function touchStart(event) {
+    const item = event.target;
+    event.preventDefault();
+    item.isDragging = true;
+    item.initialX = event.touches[0].clientX;
+    item.initialY = event.touches[0].clientY;
+    item.addEventListener("touchmove", touchMove);
+    item.addEventListener("touchend", touchEnd);
+}
+
+function touchMove(event) {
+    const item = event.target;
+    if (item.isDragging) {
+        const deltaX = event.touches[0].clientX - item.initialX;
+        const deltaY = event.touches[0].clientY - item.initialY;
+        item.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+    }
+}
+
+function touchEnd(event) {
+    const item = event.target;
+    const bins = document.querySelectorAll(".bin");
+    item.isDragging = false;
+    item.style.transform = '';
+
+    bins.forEach(bin => {
+        const binRect = bin.getBoundingClientRect();
+        const itemRect = item.getBoundingClientRect();
+        if (itemRect.left < binRect.right && itemRect.right > binRect.left &&
+            itemRect.top < binRect.bottom && itemRect.bottom > binRect.top) {
+            const binType = bin.dataset.type;
+            const itemType = item.dataset.type;
+
+            if (itemType === binType) {
+                updateScore();
+                item.setAttribute('data-dropped', 'true');
+                item.remove();
+            } else {
+                alert("¡Intenta de nuevo!");
+            }
+        }
+    });
+
+    item.removeEventListener("touchmove", touchMove);
+    item.removeEventListener("touchend", touchEnd);
+}
+
+// Event Listeners
 items.forEach(item => {
     item.addEventListener("dragstart", dragStart);
+    item.addEventListener("touchstart", touchStart);
 });
 
 bins.forEach(bin => {
@@ -221,63 +393,37 @@ bins.forEach(bin => {
     bin.addEventListener("drop", dropItem);
 });
 
-        // ** Funciones del Modal (Notificaciones)**
-        
-        // Obtener los elementos del modal y el ícono de notificación
-        const notificationIcon = document.getElementById('notification-icon');
-        const modal = document.getElementById('notification-modal');
-        const closeModal = document.getElementById('close-modal');
-        
-        // Mostrar el modal cuando se hace clic en el ícono de notificación
-        notificationIcon.onclick = function() {
-            modal.style.display = "block";
-        }
-        
-        // Cerrar el modal cuando se hace clic en el "x"
-        closeModal.onclick = function() {
-            modal.style.display = "none";
-        }
-        
-        // Cerrar el modal si el usuario hace clic fuera del modal
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-        
-        // ** Funciones de Menú de Hamburguesa**
-        
-        const hamburgerMenu = document.getElementById('hamburger-menu');
-        const navLinks = document.getElementById('nav-links');
-        
-        // Agregar un evento de clic al botón de hamburguesa
-        hamburgerMenu.addEventListener('click', () => {
-            // Toggle: alterna la visibilidad del menú
-            navLinks.classList.toggle('active');
-        });
-        
-        // Obtener el botón de cierre del menú y agregar el evento
-        const closeMenu = document.getElementById('close-menu');
-        closeMenu.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-        });
-        
-        // ** Funciones para Actualizar el Puntaje y Animación**
-        
-        function updateScore() {
-            score += 10;
-            scoreElement.textContent = score;
-        
-            // Agregar la clase de animación
-            scoreElement.classList.add('animate');
-        
-            // Eliminar la clase de animación después de que termine
-            setTimeout(() => {
-                scoreElement.classList.remove('animate');
-            }, 500); // El tiempo coincide con la duración de la animación
-        }
-        
-        </script>
-        
+// Notificaciones y menú hamburguesa
+const notificationIcon = document.getElementById('notification-icon');
+const modal = document.getElementById('notification-modal');
+const closeModal = document.getElementById('close-modal');
+
+notificationIcon.onclick = function() {
+    modal.style.display = "block";
+}
+
+closeModal.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+const hamburgerMenu = document.getElementById('hamburger-menu');
+const navLinks = document.getElementById('nav-links');
+
+hamburgerMenu.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+});
+
+const closeMenu = document.getElementById('close-menu');
+closeMenu.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+});
+
+   </script>
 </body>
 </html>

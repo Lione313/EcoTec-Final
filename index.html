@@ -24,8 +24,26 @@
                 <li>
                     <a href="javascript:void(0)" id="notification-icon">
                         <img src="https://img.icons8.com/ios/50/000000/appointment-reminders.png" alt="Notificación" class="notification-icon">
+
+                        <style>
+                        .notification-icon {
+                            filter: brightness(0) invert(1); /* Cambia el color a blanco */
+                        }
+                        </style>
+                        
                     </a>
                 </li>
+                <div id="notification-modal" class="modal">
+                    <div class="modal-content">
+                        <span id="close-modal" class="close">&times;</span>
+                        <h2 style="color: black;">Notificaciones</h2>
+                        <ul>
+                            <li style="color: black;">Notificación 1: ¡Nuevo artículo publicado!</li>
+                            <li style="color: black;">Notificación 2: ¡Reciclaje completado con éxito!</li>
+                            <li style="color: black;">Notificación 3: ¡Nuevo comentario en tu publicación!</li>
+                        </ul>
+                    </div>
+                </div>
             </ul>
             
             <!-- Modal de notificaciones -->
@@ -46,17 +64,18 @@
             </div>
         </nav>
     </header>
-
     <section id="inicio" class="hero">
         <div class="hero-content">
             <h2>Recicla para un futuro mejor</h2>
             <p>Únete a nosotros para salvar el planeta, un paso a la vez.</p>
-            
+    
             <!-- Contenedor de la imagen y el contador -->
             <div class="hero-info">
                 <!-- Imagen de tacho de basura -->
                 <div class="trash-container">
-                    <img src="https://plazavea.vteximg.com.br/arquivos/ids/19926610-512-512/image-6805009fd5954c7e80259c1ac40b154b.jpg" alt="Tacho de Basura" class="trash-image">
+                    <img src="https://plazavea.vteximg.com.br/arquivos/ids/19926610-512-512/image-6805009fd5954c7e80259c1ac40b154b.jpg" 
+                         alt="Tacho de Basura" 
+                         class="trash-image">
                 </div>
     
                 <!-- Contador animado -->
@@ -64,9 +83,19 @@
                     <h3>Reciclados hoy:</h3>
                     <div id="counter" class="counter">0</div>
                 </div>
+    
+                <!-- Barra de capacidad del tacho -->
+                <div class="capacity-bar-container">
+                    <h3>Capacidad del Tacho</h3>
+                    <div class="capacity-bar-background">
+                        <div id="capacity-bar" class="capacity-bar"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+    
+    
     
 
     <footer>
@@ -116,6 +145,40 @@ const closeMenu = document.getElementById('close-menu');
 closeMenu.addEventListener('click', () => {
     navLinks.classList.remove('active');
 });
+const counterElement = document.getElementById('counter');
+const capacityBarElement = document.getElementById('capacity-bar');
+
+// Capacidad máxima de residuos
+const maxCapacity = 40;
+
+// Inicializa el contador
+let currentCount = 0;
+
+// Evento para incrementar el contador y actualizar la barra
+document.querySelector('.hero').addEventListener('click', () => {
+    if (currentCount < maxCapacity) {
+        currentCount++;
+        updateUI();
+    }
+});
+
+// Actualiza el contador y la barra de capacidad
+function updateUI() {
+    // Actualiza el contador en pantalla
+    counterElement.textContent = currentCount;
+
+    // Calcula el ancho de la barra en porcentaje
+    const progressPercentage = (currentCount / maxCapacity) * 100;
+
+    // Actualiza el estilo de la barra
+    capacityBarElement.style.width = `${progressPercentage}%`;
+
+    // Cambia el color de la barra al 100%
+    if (currentCount === maxCapacity) {
+        capacityBarElement.style.backgroundColor = '#f44c4c'; // Rojo para indicar lleno
+    }
+}
+
 
     </script>
 </body>
